@@ -20,7 +20,7 @@ export const SocialIconWrap = styled.div`
 `
 
 export const SocialIcon = styled.img`
-  width: 18px;
+  width: 25px;
   height: auto;
   object-fit: contain;
   margin: 0 5px;
