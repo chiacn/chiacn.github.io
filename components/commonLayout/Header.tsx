@@ -4,7 +4,7 @@ import { Group, HeaderContainer, LogoImage, ThemeModeImage } from './Header.styl
 import Nav from './Nav';
 
 export default function Header() {
-    const [themeMode, setThemeMode] = useState<string>(document.body.dataset.theme);
+    const [themeMode, setThemeMode] = useState<string>(document.body.dataset.theme || 'default');
 
     useEffect(() => {
         document.body.dataset.theme = themeMode;
@@ -35,9 +35,9 @@ export default function Header() {
                         <LogoImage src="/static/logo-light.jpg" alt="밝은 로고" />
                     )} */}
                     {themeMode === 'dark' ? (
-                        <div className="bg-blue-500 cursor-pointer">CodingPoodle</div>
+                        <div className="px-30 bg-blue-500 cursor-pointer font-press">CodingPoodle</div>
                     ) : (
-                        <div className="bg-white-500 cursor-pointer">CodingPoodle</div>
+                        <div className="bg-white-500 cursor-pointer font-press">CodingPoodle</div>
                     )}
                 </Link>
             </Group>
