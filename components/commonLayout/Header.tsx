@@ -18,7 +18,6 @@ export default function Header() {
 
     return (
         <HeaderContainer>
-            <Nav/>
             <Group>
                 <div onClick={themeModeHandle}>
                     {themeMode === 'dark' ? (
@@ -35,12 +34,13 @@ export default function Header() {
                         <LogoImage src="/static/logo-light.jpg" alt="밝은 로고" />
                     )} */}
                     {themeMode === 'dark' ? (
-                        <div className="px-30 bg-blue-500 cursor-pointer font-press">CodingPoodle</div>
+                        <div className="bg-white-500 cursor-pointer font-press">CodingPoodle</div>
                     ) : (
                         <div className="bg-white-500 cursor-pointer font-press">CodingPoodle</div>
                     )}
                 </Link>
             </Group>
+            <Nav/>
         </HeaderContainer>
     )
 }

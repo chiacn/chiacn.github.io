@@ -2,7 +2,7 @@
 import Head from "next/head"
 import Nav from './Nav'
 import dynamic from 'next/dynamic'
-import { StyledContainer, StyledMain } from "../Container.style"
+import { StyledContainer, StyledMain } from './Container.style'
 import Footer from "./Footer"
 
 interface ContainerProps {
