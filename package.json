@@ -2,13 +2,14 @@
   "name": "blog",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://chiacn.github.io",
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
     "start": "next start",
     "lint": "next lint",
     "predeploy": "npm run build",
-    "deploy": "touch out/.nojekyll && gh-pages -d out --dotfiles"
+    "deploy": "npm run build && touch ./out/.nojekyll && gh-pages -d out -t true"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -24,7 +25,6 @@
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "facepaint": "^1.2.1",
-    "gh-pages": "^5.0.0",
     "next": "13.2.4",
     "next-compose-plugins": "^2.2.1",
     "next-contentlayer": "^0.3.0",
@@ -37,5 +37,8 @@
     "styled-components": "^5.3.9",
     "tailwindcss": "^3.2.7",
     "typescript": "5.0.2"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
