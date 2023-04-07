@@ -1,8 +1,8 @@
 
 import ArticleLayout from '@/components/Article/ArticleLayout'
 import { allArticles, Article } from 'contentlayer/generated'
-import { PathSegment, TreeNode } from '@/libs/types'
-import { buildTree } from '@/libs/utils'
+import { PathSegment, MenuTreeNode } from '@/libs/types'
+import { buildMenuTree } from '@/libs/utils'
 
 const ArticlePostPage = ({tree, article}: {tree: any; article: any}) => {
     return <ArticleLayout tree={tree} article={article} />
@@ -42,7 +42,7 @@ export const getStaticProps = async ({ params }: {params: any}) => {
         _ => _.pathSegments.map((_: PathSegment) => _.pathName).join('/') === pagePath
     ) || null // !: TypeScript 비 null 단언 연산자 (속성 값이 null이 아님을 단언한다.)
 
-    const tree = buildTree(allArticles);
+    const tree = buildMenuTree(allArticles);
     return { props: { article, tree } }
 }
 

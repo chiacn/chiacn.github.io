@@ -61,6 +61,7 @@ export const urlFromFilePath = (doc: DocumentGen): string => {
  *  
  */
 
+// TODO: 폴더 단위만 스캔하도록 개선?
 export const Article = defineDocumentType(() => ({
     name: 'Article',
     filePathPattern: `articles/**/*.mdx`,

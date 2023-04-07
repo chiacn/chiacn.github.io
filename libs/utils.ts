@@ -1,29 +1,29 @@
 import { allArticles, Article } from 'contentlayer/generated'
-import { PathSegment, TreeNode } from '@/libs/types'
+import { PathSegment, MenuTreeNode } from '@/libs/types'
 
-
-/**
-    1. allArticles 구조: contentlayer.config.ts에서 지정한 
- */
-export const buildTree = (articles: Article[], parentPathNames: string[] = []): TreeNode[] => {
-    const level = parentPathNames.length
+export const buildMenuTree = (articles: Article[], parentPathNames: string[] = []): MenuTreeNode[] => {
+    const level = parentPathNames.length;
     return articles
-      .filter(
+      .filter( 
         _ =>
-          _.pathSegments.length === level + 1 && // pathSegments의 길이, 즉 경로의 깊이가 부모보다 깊을 때
+          _.pathSegments.length > level &&  // pathSegments.length: 기존 경로 / level (이전) 부모경로, 점점 늘어남 | 재귀함수로 받은 부모 경로 level 길이와 전체 경로 길이가 같아지면 종료.
           _.pathSegments
             .map((_: PathSegment) => _.pathName)
             .join('/')
-            .startsWith(parentPathNames.join('/')) // 부모 경로를 포함하는 것 filter
+            .startsWith(parentPathNames.join('/')) 
       )
       .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
-      .map<TreeNode>(doc => ({
-        title: doc.title,
-        date: doc.date,
-        urlPath: '/articles/' + doc.pathSegments.map((_: PathSegment) => _.pathName).join('/'),
-        children: buildTree(
-            articles,
-          doc.pathSegments.map((_: PathSegment) => _.pathName)
-        ),
-      }))
+      .map<MenuTreeNode>(doc => {
+          const currentPath = doc.pathSegments.slice(0, level+1); // url 중 현재 탐색 중인 계층 level만 반영하도록
+          return {
+              title: currentPath[currentPath.length-1].pathName,
+              urlPath: '/articles/' + currentPath.map((_: PathSegment) => _.pathName).join('/'), 
+              children: buildMenuTree(
+                  articles,
+                  currentPath.map((_: PathSegment) => _.pathName)
+              ),
+          }
+      })
   }
+
+// TODO: export const buildArticlesTree 

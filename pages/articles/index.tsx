@@ -4,11 +4,10 @@
 import ArticleLayout from "@/components/Article/ArticleLayout";
 import Container from "@/components/commonLayout/Container";
 import { allArticles, Article } from "@/.contentlayer/generated";
-import { buildTree } from "@/libs/utils";
-import { TreeRoot } from "@/libs/types";
+import { buildMenuTree } from "@/libs/utils";
+import { MenuTreeRoot } from "@/libs/types";
 
-export default function Articles({tree}: {tree: TreeRoot}) {
-    console.log('allArticles = ', allArticles)
+export default function Articles({tree}: {tree: MenuTreeRoot}) {
     return (
         <>
             <ArticleLayout tree={tree}>
@@ -24,7 +23,7 @@ export default function Articles({tree}: {tree: TreeRoot}) {
  * getStaticProps는 Next.js 페이지 컴포넌트에만 사용할 수 있음. ArticleLayout에는 사용할 수 없다고 함.
  */
 export const getStaticProps = async () => {
-    const tree = buildTree(allArticles);
+    const tree = buildMenuTree(allArticles);
     return { props: { tree } }
 }
 

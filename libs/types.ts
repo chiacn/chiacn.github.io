@@ -1,10 +1,9 @@
-export type TreeNode = {
+export type MenuTreeNode = {
     title: string;
-    date: string;
     urlPath: string;
-    children: TreeNode[];
+    children: MenuTreeNode[];
 }
 
 export type PathSegment = {pathName: string};
 
-export type TreeRoot = TreeNode[];
+export type MenuTreeRoot = MenuTreeNode[];
