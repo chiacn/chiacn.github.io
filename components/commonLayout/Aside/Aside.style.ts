@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import mq from '../../styles/utils/mq'
+import mq from '@/styles/utils/mq'
 import { css } from '@emotion/react'
 
 const dynamicVisible = ({ visible }: {visible: boolean}) => {
@@ -21,16 +21,14 @@ const dynamicVisible = ({ visible }: {visible: boolean}) => {
   }
 }
 
-export const ArticleAsideContainer = styled.div`
+export const AsideContainer = styled.div`
     border: 1px solid;
-    margin-top: 10%;
-
     flex-flow: column nowrap;
     display: flex;
-    width: 100%;
-    height: 100%;
+    width: 200px;
+    height: 80vh;
     overflow-y: scroll;
-    padding-left: 80px;
+    padding-left: 10%;
     &::-webkit-scrollbar {
         display: none;
     }
@@ -41,17 +39,17 @@ export const ArticleAsideContainer = styled.div`
     ${dynamicVisible}
 `
 
-export const ArticleAsideTitle = styled.div`
+export const AsideTitle = styled.div`
     font-size: 25px;
 `
 
-export const ArticleAsideList = styled.div`
+export const AsideList = styled.div`
     margin-top: 30px;
     display: flex;
     flex-direction: column;
 `
 
-export const ArticleAsideText = styled.span`
+export const AsideText = styled.span`
   color: var(--tx-sub-dark);
   transition: 0.3s;
   cursor: pointer;
@@ -64,7 +62,7 @@ export const ArticleAsideText = styled.span`
   }
 `
 
-export const ArticleAsideChildText = styled.a`
+export const AsideChildText = styled.a`
   color: var(--tx-sub-dark);
   transition: 0.3s;
   cursor: pointer;
@@ -76,7 +74,7 @@ export const ArticleAsideChildText = styled.a`
   }
 `
 
-export const ArticleAsideMobileIcon = styled.div`
+export const AsideMobileIcon = styled.div`
   align-items: center;
   justify-content: center;
   width: 50px;

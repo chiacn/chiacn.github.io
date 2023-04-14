@@ -1,11 +1,15 @@
 
-import ArticleLayout from '@/components/Article/ArticleLayout'
 import { allArticles, Article } from 'contentlayer/generated'
 import { PathSegment, MenuTreeNode } from '@/libs/types'
 import { buildMenuTree } from '@/libs/utils'
+import Container from '@/components/commonLayout/Container'
 
 const ArticlePostPage = ({tree, article}: {tree: any; article: any}) => {
-    return <ArticleLayout tree={tree} article={article} />
+    return (
+             <Container aside={tree}>
+                {article}
+             </Container>
+    )
 }
 
 /**

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { Group, HeaderContainer, LogoImage, ThemeModeImage } from './Header.style';
+import * as S from './Header.style';
 import Nav from './Nav';
 
 export default function Header() {
@@ -17,13 +17,13 @@ export default function Header() {
     }
 
     return (
-        <HeaderContainer>
-            <Group>
+        <S.HeaderContainer>
+            <S.Group>
                 <div onClick={themeModeHandle}>
                     {themeMode === 'dark' ? (
-                        <ThemeModeImage alt="밝은 모드로 변경" src="/static/moon.png"/>
+                        <S.ThemeModeImage alt="밝은 모드로 변경" src="/static/moon.png"/>
                     ) : (
-                        <ThemeModeImage alt="어두운 모드로 변경" src="/static/sun.png"/>
+                        <S.ThemeModeImage alt="어두운 모드로 변경" src="/static/sun.png"/>
                     )
                     }
                 </div>
@@ -39,8 +39,8 @@ export default function Header() {
                         <div className="bg-white-500 cursor-pointer font-press">CodingPoodle</div>
                     )}
                 </Link>
-            </Group>
+            </S.Group>
             <Nav/>
-        </HeaderContainer>
+        </S.HeaderContainer>
     )
 }

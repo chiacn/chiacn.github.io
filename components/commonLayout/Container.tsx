@@ -2,11 +2,14 @@
 import Head from "next/head"
 import Nav from './Nav'
 import dynamic from 'next/dynamic'
-import { StyledContainer, StyledMain } from './Container.style'
+import * as S from './Container.style'
 import Footer from "./Footer"
+import Aside from "./Aside/Aside"
+import { MenuTreeRoot } from "@/libs/types";
 
 interface ContainerProps {
-    children: React.ReactNode;
+    children: React.ReactNode | string;
+    aside?: MenuTreeRoot;
 }
 
 /**
@@ -19,18 +22,25 @@ const Header = dynamic(() => import('./Header'), {
     ssr: false,
 })
 
-export default function Container({children}: ContainerProps) {   
+export default function Container({children, aside}: ContainerProps) {   
     return (
         <>
             <Head>
                 <meta content="width=device-width, initial-scale=1" name="viewport" />
             </Head>
-
-            <StyledContainer>
+            
+            <S.Container>
                 <Header/>
-                <StyledMain>{children}</StyledMain>     
+                <S.Section>
+                    { aside &&
+                        <S.Aside>
+                            <Aside tree={aside}/>
+                        </S.Aside>
+                    }
+                    <S.Main>{children}</S.Main>   
+                </S.Section>
                 <Footer/>       
-            </StyledContainer>
+            </S.Container>
         </>
     )
 }
