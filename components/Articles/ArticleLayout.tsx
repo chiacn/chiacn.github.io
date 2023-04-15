@@ -3,7 +3,7 @@ import MDXPost from '../MDXPost';
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
 
-export default function ArticleLayout({article}) {
+export default function ArticleLayout({article}: {article: any}) {
     const MDXContent = useMDXComponent(article.body.code)
 
     return (
