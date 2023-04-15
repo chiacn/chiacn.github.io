@@ -40,3 +40,13 @@ export const buildMenuTree = (articles: Article[], parentPathNames: string[] = [
   }
 
 // TODO: export const buildArticlesTree 
+
+
+export const usDateString = (date: Date) => {
+    const options: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    }
+    return new Date(date).toLocaleDateString('en-US', options)
+}

@@ -9,7 +9,6 @@ interface AsideProps {
 }
 
 export default function Aside({tree, title = 'Articles'}: AsideProps) {
-    console.log('Aside/ tree = ', tree)
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const mobileMenuHandler = () => {
         window.scrollTo({

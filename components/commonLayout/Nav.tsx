@@ -23,9 +23,6 @@ const Links = ({setIsDropMenuOpen}: {setIsDropMenuOpen: any}) => {
                     </div>
                 </Link>
             ))}
-            <Link href="/articles/article-01" key="test" passHref>
-                Test
-            </Link>
         </>
     )
 }

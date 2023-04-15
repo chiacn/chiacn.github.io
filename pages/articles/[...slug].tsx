@@ -3,11 +3,12 @@ import { allArticles, Article } from 'contentlayer/generated'
 import { PathSegment, MenuTreeNode } from '@/libs/types'
 import { buildMenuTree } from '@/libs/utils'
 import Container from '@/components/commonLayout/Container'
+import ArticleLayout from '@/components/Articles/ArticleLayout'
 
 const ArticlePostPage = ({tree, article}: {tree: any; article: any}) => {
     return (
              <Container aside={tree}>
-                {article}
+                <ArticleLayout article={article}/>
              </Container>
     )
 }
@@ -43,9 +44,8 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }: {params: any}) => {
     const pagePath = params.slug.join('/').replace(/.mdx/,'')
     const article = allArticles.find(
-        _ => _.pathSegments.map((_: PathSegment) => _.pathName).join('/') === pagePath
+        _ => _.pathSegments.map((_: PathSegment) => _.pathName).join('/').startsWith(pagePath)
     ) || null // !: TypeScript 비 null 단언 연산자 (속성 값이 null이 아님을 단언한다.)
-
     const tree = buildMenuTree(allArticles);
     return { props: { article, tree } }
 }
