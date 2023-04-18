@@ -1,7 +1,7 @@
 export type MenuTreeNode = {
     title: string;
     urlPath: string;
-    children: MenuTreeNode[];
+    children?: any;
 }
 
 export type PathSegment = {pathName: string};

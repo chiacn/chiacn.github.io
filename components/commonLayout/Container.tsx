@@ -34,7 +34,7 @@ export default function Container({children, aside}: ContainerProps) {
                 <S.Section>
                     { aside &&
                         <S.Aside>
-                            <Aside tree={aside}/>
+                            <Aside menuTree={aside}/>
                         </S.Aside>
                     }
                     <S.Main>{children}</S.Main>   

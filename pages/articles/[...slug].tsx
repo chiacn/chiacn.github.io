@@ -1,14 +1,27 @@
 
 import { allArticles, Article } from 'contentlayer/generated'
 import { PathSegment, MenuTreeNode } from '@/libs/types'
-import { buildMenuTree } from '@/libs/utils'
+import { buildArticleList, buildMenuTree } from '@/libs/utils'
 import Container from '@/components/commonLayout/Container'
 import ArticleLayout from '@/components/Articles/ArticleLayout'
+import ArticlesList from '@/components/Articles/ArticlesList'
 
-const ArticlePostPage = ({tree, article}: {tree: any; article: any}) => {
+interface ArticlePostPage {
+    menuTree: any;
+    article?: any;
+    isArticle: boolean;
+    articlesList: any;
+    menuTitle?: any;
+}
+
+const ArticlePostPage = ({menuTree, article, isArticle, articlesList, menuTitle}: ArticlePostPage) => {
     return (
-             <Container aside={tree}>
-                <ArticleLayout article={article}/>
+             <Container aside={menuTree}>
+                { isArticle ?
+                    <ArticleLayout article={article}/>
+                    :
+                    <ArticlesList articlesList={articlesList} menuTitle={menuTitle}/>
+                }
              </Container>
     )
 }
@@ -16,6 +29,9 @@ const ArticlePostPage = ({tree, article}: {tree: any; article: any}) => {
 /**
  * getStaticPaths : Next.js에서 동적 라우팅을 구현할 때 어떤 경로들을 build-time에 생성할지를 지정하는 함수.
  * 페이지가 필요한 경우 on-demand로 생성하는 대신 페이지들을 빌드타임에 생성하여 성능을 향상시킬 수 있음.
+ * 
+ * fallback : 
+    => getStaticPaths에서 paths: []에 넣지 않은 동적경로의 행동양식을 지정한다. (paths: [~]를 제외한 경로의 행동양식)
  
   @returns { 
     Prmoise<{
@@ -42,12 +58,19 @@ export const getStaticPaths = async () => {
  *  (참고) - SSG(Static Site Generation) 방식이기 때문에 여기 console찍으면 브라우저가 아니라 terminal에 표시된다.
  */
 export const getStaticProps = async ({ params }: {params: any}) => {
-    const pagePath = params.slug.join('/').replace(/.mdx/,'')
-    const article = allArticles.find(
-        _ => _.pathSegments.map((_: PathSegment) => _.pathName).join('/').startsWith(pagePath)
-    ) || null // !: TypeScript 비 null 단언 연산자 (속성 값이 null이 아님을 단언한다.)
-    const tree = buildMenuTree(allArticles);
-    return { props: { article, tree } }
+    const articlePath = params.slug.join('/').replace(/.mdx/,'');
+    const menuTree = buildMenuTree();
+    const articlesList = buildArticleList(allArticles, articlePath);
+    const menuTitle = params.slug[params.slug.length-1];
+
+    // mdx인 경우(글)와 아닌 경우(글 목록) 분리
+    if(params.slug[params.slug.length-1].endsWith('.mdx')) {
+        // 글인 경우
+        return {props: { articlePath, menuTree, isArticle: true } }
+    }else {
+        // 글 목록인 경우
+        return { props: { articlePath, menuTree, isArticle: false, articlesList: articlesList, menuTitle: menuTitle } }   
+    }
 }
 
 export default ArticlePostPage 

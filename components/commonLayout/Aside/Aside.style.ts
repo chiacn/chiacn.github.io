@@ -49,31 +49,6 @@ export const AsideList = styled.div`
     flex-direction: column;
 `
 
-export const AsideText = styled.span`
-  color: var(--tx-sub-dark);
-  transition: 0.3s;
-  cursor: pointer;
-  padding: 10px 0;
-  word-break: keep-all;
-  font-size: 25px;
-  font-weight: 600;
-  &:hover {
-    color: var(--tx-accent-light);
-  }
-`
-
-export const AsideChildText = styled.a`
-  color: var(--tx-sub-dark);
-  transition: 0.3s;
-  cursor: pointer;
-  padding: 10px 0 10px 15px;
-  word-break: keep-all;
-  font-size: 14px;
-  &:hover {
-    color: var(--tx-accent);
-  }
-`
-
 export const AsideMobileIcon = styled.div`
   align-items: center;
   justify-content: center;

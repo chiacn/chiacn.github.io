@@ -4,11 +4,11 @@ import * as S from './Aside.style';
 import AsideItem from './AsideItem';
 
 interface AsideProps {
-    tree: MenuTreeRoot;
+    menuTree: MenuTreeRoot;
     title?: string;
 }
 
-export default function Aside({tree, title = 'Articles'}: AsideProps) {
+export default function Aside({menuTree, title = 'Articles'}: AsideProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const mobileMenuHandler = () => {
         window.scrollTo({
@@ -21,7 +21,7 @@ export default function Aside({tree, title = 'Articles'}: AsideProps) {
             <S.AsideContainer visible={isMenuOpen}>
                 <S.AsideTitle>{title}</S.AsideTitle>
                 <S.AsideList>
-                {tree.map(t => (
+                {menuTree?.map(t => (
                     <AsideItem key={t.title} item={t} />
                 ))}
                 </S.AsideList>

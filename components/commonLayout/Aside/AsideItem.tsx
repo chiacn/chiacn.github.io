@@ -1,30 +1,29 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { AsideChildText, AsideText } from './Aside.style';
+import * as S from './AsideItem.style';
 import { MenuTreeNode } from '@/libs/types';
 
 export default function AsideItem({item}: {item: MenuTreeNode}) {
-
     const [isItemsOpen, setIsItemsOpen] = useState((item.children.length > 0) ? true : false);
     return (
         <React.Fragment key={item.title}>
             {item.children.length > 0 
                 ?
-                <AsideText onClick={() => setIsItemsOpen(!isItemsOpen)}>
+                <S.AsideText onClick={() => setIsItemsOpen(!isItemsOpen)}>
                     <span>{item.title}</span>
-                </AsideText>
+                </S.AsideText>
                 :
                 <Link href={item.urlPath} passHref>
-                    <AsideText onClick={() => setIsItemsOpen(!isItemsOpen)}>
+                    <S.AsideText onClick={() => setIsItemsOpen(!isItemsOpen)}>
                         <span>{item.title}</span>
-                    </AsideText>
+                    </S.AsideText>
                 </Link> 
             }
-            {item.children && item.children.length > 0 && isItemsOpen && (
+            {item.children.length > 0 && isItemsOpen && (
                 <>
-                    {item.children.map(c => (
-                        <Link key={c.title} href={c.urlPath}>
-                            <AsideChildText>{c.title}</AsideChildText>
+                    {item.children.map((childPath: string) => (
+                        <Link key={item.urlPath + childPath} href={`${item.urlPath}/${childPath}`}>
+                            <S.AsideChildText>{childPath}</S.AsideChildText>
                         </Link>
                     ))}
                 </>
