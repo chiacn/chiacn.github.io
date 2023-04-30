@@ -1,6 +1,6 @@
 import { allArticles, Article } from 'contentlayer/generated'
 import { PathSegment, MenuTreeNode } from '@/libs/types'
-import { articlesMenuList } from '@/data/menu';
+import { ArticleListDescription, articlesMenuList } from '@/data/menu';
 
 export const buildMenuTree = () => {
     const menuList = articlesMenuList;
@@ -29,6 +29,10 @@ export const buildArticleList = (articles: Article[], basePath: string): MenuTre
           }
       })
   }
+
+export const getArticleListDescription = (menuTitle: string) => {
+    return ArticleListDescription[menuTitle]
+}
 
 export const usDateString = (date: Date) => {
     const options: Intl.DateTimeFormatOptions = {

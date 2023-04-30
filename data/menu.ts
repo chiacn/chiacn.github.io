@@ -15,3 +15,11 @@ export const articlesMenuList = [
         children: ['Test'],
     }
 ]
+
+export const ArticleListDescription: any = {
+    CS: `
+        CS 글 설명
+    `,
+    JavaScript: `
+    `
+}

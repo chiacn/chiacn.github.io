@@ -26,7 +26,7 @@ export const Main = styled.main`
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
-  max-width: 700px;
+  max-width: 80%;
   align-items: center;
   z-index: 10;
   ${mq()({
