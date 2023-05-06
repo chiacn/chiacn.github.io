@@ -7,3 +7,8 @@ export type MenuTreeNode = {
 export type PathSegment = {pathName: string};
 
 export type MenuTreeRoot = MenuTreeNode[];
+
+export type articlesList = {
+    title: string;
+    urlPath: string;
+}

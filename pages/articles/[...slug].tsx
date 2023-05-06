@@ -14,10 +14,11 @@ interface ArticlePostPage {
     menuTitle?: any;
 }
 
-const ArticlePostPage = ({menuTree, article, isArticle, articlesList, menuTitle}: ArticlePostPage) => {
+const ArticlePostPage = ({menuTree, article, articlesList, menuTitle}: ArticlePostPage) => {
+    console.log('article = ', article)
     return (
              <Container aside={menuTree}>
-                { isArticle ?
+                { article ?
                     <ArticleLayout article={article}/>
                     :
                     <ArticlesList articlesList={articlesList} menuTitle={menuTitle}/>
@@ -58,18 +59,21 @@ export const getStaticPaths = async () => {
  *  (참고) - SSG(Static Site Generation) 방식이기 때문에 여기 console찍으면 브라우저가 아니라 terminal에 표시된다.
  */
 export const getStaticProps = async ({ params }: {params: any}) => {
-    const articlePath = params.slug.join('/').replace(/.mdx/,'');
+    const articlePath = 'articles/' + params.slug.join('/').replace(/.mdx/,'');
     const menuTree = buildMenuTree();
     const articlesList = buildArticleList(allArticles, articlePath);
     const menuTitle = params.slug[params.slug.length-1];
 
+    // article인지 list인지 판별 (article이면 contentLayer에서 가져오는 path와 slug로 들어오는 주소 일치)
+    const article = allArticles.filter(article => article.url_path === articlePath)[0]; 
+
     // mdx인 경우(글)와 아닌 경우(글 목록) 분리
-    if(params.slug[params.slug.length-1].endsWith('.mdx')) {
+    if(article) {
         // 글인 경우
-        return {props: { articlePath, menuTree, isArticle: true } }
+        return { props: { articlePath, menuTree, article: article } }
     }else {
         // 글 목록인 경우
-        return { props: { articlePath, menuTree, isArticle: false, articlesList: articlesList, menuTitle: menuTitle } }   
+        return { props: { articlePath, menuTree, article: false, articlesList: articlesList, menuTitle: menuTitle } }   
     }
 }
 

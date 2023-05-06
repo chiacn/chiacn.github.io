@@ -7,24 +7,23 @@ export const buildMenuTree = () => {
     return menuList
         .map( _ => ({
             title: _.title,
-            urlPath: `/articles/${_.title}/`,
+            urlPath: `/articles/${_.title}`,
             children: _.children,
         }))
   }
 
-export const buildArticleList = (articles: Article[], basePath: string): MenuTreeNode[] => {
+export const buildArticleList = (articles: Article[], basePath: string, type = undefined): MenuTreeNode[] => {
+    const parentPath = (type === 'all') ? '/' : basePath; // 특정 경로(메뉴)의 글들만 보이도록
     return articles
       .filter( 
         _ => (
-          _.pathSegments
-            .map((_: PathSegment) => _.pathName)
-            .join('/')
-            .startsWith(basePath))
+          _.url_path
+          .startsWith(parentPath))
       )
       .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
-      .map<MenuTreeNode>(doc => {       
+      .map<MenuTreeNode>(doc => {
           return {
-              title: doc.pathSegments[doc.pathSegments.length-1],
+              title: doc.title,
               urlPath: '/articles/' + doc.pathSegments.map((_: PathSegment) => _.pathName).join('/'), 
           }
       })

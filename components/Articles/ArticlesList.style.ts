@@ -21,3 +21,7 @@ export const ArticleListDescription = styled.div`
     height: 100%;
     
 `
+
+export const ArticleList = styled.div`
+    
+`

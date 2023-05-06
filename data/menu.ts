@@ -1,8 +1,8 @@
 export const articlesMenuList = [
     {
         order: 1,
-        title: '블로그 개설기',
-        children: ['초기 설정'],
+        title: '블로그개설기',
+        children: ['초기설정'],
     },
     {
         order: 2,

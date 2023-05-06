@@ -15,7 +15,7 @@ export default function Footer() {
                 Copyright © {new Date().getFullYear()} {metadata.author}
             </Copyright>
             <BlogInfo>
-                chiacn.dev
+                chiacn.io
             </BlogInfo>
         </FooterContainer>
     )
