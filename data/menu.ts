@@ -13,7 +13,12 @@ export const articlesMenuList = [
         order: 3,
         title: 'Argorithm',
         children: ['Test'],
-    }
+    },
+    {
+        order: 4,
+        title: 'test',
+        children: [],
+    },
 ]
 
 export const ArticleListDescription: any = {

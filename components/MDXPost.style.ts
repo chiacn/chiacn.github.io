@@ -77,6 +77,8 @@ export const MDXPostContainer = styled.div`
   .code-highlight {
     padding: 1em;
     border: 1px solid var(--tx-accent-light);
+    color: white;
+    background-color: black;
   }
   ul {
     margin: 0;

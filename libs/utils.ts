@@ -8,7 +8,7 @@ export const buildMenuTree = () => {
         .map( _ => ({
             title: _.title,
             urlPath: `/articles/${_.title}`,
-            children: _.children,
+            children: _?.children,
         }))
   }
 
