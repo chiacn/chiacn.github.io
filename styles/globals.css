@@ -1,17 +1,17 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-@import 'public/font/eng_roboto.css';
-@import 'public/font/eng_press_start_2p.css';
-@import 'public/font/eng_rubik_bubbles.css';
-@import 'public/font/kor_jua.css';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "public/font/eng_roboto.css";
+@import "public/font/eng_press_start_2p.css";
+@import "public/font/eng_rubik_bubbles.css";
+@import "public/font/kor_jua.css";
 
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -111,5 +111,146 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+/**
+  PrimeJS 관련 설정 - 
+  - 코드 박스 스타일 테마관련 정의는 css 파일에서 처리
+  - 공통 정의는 global.css에서 정의
+*/
+
+// *= : class가 language- 인 요소 모두 선택
+pre[class*="language-"] > .code-highlight {
+  /* padding: 0;
+  border: none;
+  font-size: 14px; */
+}
+
+// ::selection : 드레그, -moz- : Mozilla Firefox 지원
+pre[class*="language-"]::-moz-selection,
+pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection,
+code[class*="language-"] ::-moz-selection {
+  color: #fbf1c7; /* fg0 */
+  background: #7c6f64; /* bg4 */
+}
+
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection,
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
+  color: #fbf1c7; /* fg0 */
+  background: #7c6f64; /* bg4 */
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  /* global.css에서 padding 0으로 지정해주어야함.(important 적용) (prismJS THEME 파일에서 적용 안 되게 */
+  padding: 0 !important;
+  width: 800px;
+  margin: 0 !important;
+  margin-bottom: 20px !important;
+  overflow: auto;
+  font-size: 14px;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  border: 1px solid var(--tx-accent-light);
+  border-radius: 7px;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: 0.1em;
+  border-radius: 0.3em;
+  font-size: 14px;
+}
+
+/* 각 코드 라인에 대한 설정 */
+.code-line {
+  width: 100%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-size: 14px;
+}
+
+/* code block title */
+.rehype-code-title {
+  width: 800px;
+  /* background: var(--bg-sub); */
+  background: transparent;
+  /* border: 1px solid var(--tx-accent-light); */
+  /* border: 1px solid black !important; */
+  /* border-top-left-radius: 7px;
+  border-top-right-radius: 7px; */
+  border-radius: 7px;
+  padding: 5px 8px;
+  font-weight: 700;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+// + : 인접 형제 결합자
+.rehype-code-title + pre {
+  margin-top: 0;
+  /* border-top-left-radius: 0;
+  border-top-right-radius: 0; */
+  border-top: 0;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+.code-highlight {
+  float: left; /* 1 */
+  min-width: 100%; /* 2 */
+}
+
+.code-line {
+  display: block;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: -16px;
+  margin-right: -16px;
+  border-left-width: 4px;
+  font-size: 14px;
+}
+
+.code-line.inserted {
+  background-color: rgba(16, 185, 129, 0.2); /* Set inserted line (+) color */
+}
+
+.code-line.deleted {
+  background-color: rgba(239, 68, 68, 0.2); /* Set deleted line (-) color */
+}
+
+.highlight-line {
+  margin-left: -16px;
+  margin-right: -16px;
+  background-color: rgba(55, 65, 81, 0.5); /* Set highlight bg color */
+  border-left-width: 4px;
+  font-size: 14px;
+}
+
+.line-number::before {
+  display: inline-block;
+  width: 1rem;
+  text-align: right;
+  margin-right: 16px;
+  margin-left: -8px;
+  color: rgb(156, 163, 175); /* Line number color */
+  content: attr(line);
+}
+
+@media (max-width: 370px) {
+  pre[class*="language-"] {
+    width: 100vw;
+    margin: 0 !important;
+  }
+  .rehype-code-title {
+    background-color: red;
   }
 }
